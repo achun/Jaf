@@ -1,7 +1,7 @@
 <?php
 namespace Jaf;
 /**
- * 单例特征
+ * # 单例特征
  * @note 其他代码需要 private function __construct(){} 的声明
  */
 trait Traits_Instance {

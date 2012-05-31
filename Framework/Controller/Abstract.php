@@ -1,13 +1,13 @@
 <?php
 namespace Jaf;
 /**
- * 控制器抽象类
+ * # 控制器抽象类
  * 所有控制器必须继承此类,Jaf才能正确处理  
  * 所有此类下的public属性方法都可能被 Jaf 调用
  */
 abstract class Controller_Abstract {
 	/**
-	 * 拆分 action,以单独的文件完成action执行
+	 * ## 拆分 action,以单独的文件完成action执行
 	 * $actions 是一个数组,以action=>actionfile.php组成
 	 */
 	public $actions ;

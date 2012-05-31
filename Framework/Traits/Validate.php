@@ -1,11 +1,11 @@
 <?php
 namespace Jaf;
 /**
- * 过滤/校验特征
+ * # 过滤/校验特征
  */
 trait Traits_Filter {
  /**
-  * 根据 name 匹配到的成员函数对数据进行校验过滤
+  * ## 根据 name 匹配到的成员函数对数据进行校验过滤
   * @note 数据被引用传递,如果 $name 过滤器返回 false 结束后续过滤
   * @return boolean
   */
@@ -20,7 +20,7 @@ trait Traits_Filter {
  }
  private $_traits_filter=array();
  /**
-  * 根据 name 匹配到 $_traits_filter 对数据进行校验过滤
+  * ## 根据 name 匹配到 $_traits_filter 对数据进行校验过滤
   * @note 数据被引用传递,如果 $name 过滤器返回 false 结束后续过滤
   * @return boolean
   */

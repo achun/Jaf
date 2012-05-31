@@ -1,7 +1,7 @@
 <?php
 namespace Jaf;
 /**
- * 请求特征
+ * # 请求特征
  * @note 请求不一定是客户端原始请求,也可能是内部发起的请求  
  * 所以 Jaf 中的请求不再关心 URI
  */
@@ -25,22 +25,23 @@ trait Traits_Request {
 				# code...
 				break;
 		}
+		func_get_args()
 	}
 	/**
-	 * 获取请求 URI 路径部分
+	 * ## 获取请求 URI 路径部分
 	 */
 	public function getRequestBaseUri ( ){
 
 		return $this->_traits_request_base_uri;
 	}
 	/**
-	 * 获取请求 URI
+	 * ## 获取请求 URI
 	 */
 	public function getRequestUri (){
 		return $this->_traits_request_uri;
 	}
 	/**
-	 * 获取请求中的某个参数
+	 * ## 获取请求中的某个参数
 	 * @param  String $name    参数名  
 	 * @param  mixed  $default 没有此参数返回的默认值  
 	 * @return mixed
@@ -52,13 +53,13 @@ trait Traits_Request {
 			$default;
 	}
 	/**
-	 * 获取请求的参数
+	 * ## 获取请求的参数
 	 */
 	public function getRequestParams ( ){
 		return $this->_traits_request_params;
 	}
 	/**
-	 * 获取原始请求使用的方法
+	 * ## 获取原始请求使用的方法
 	 * 可能的值:
 	 * - GET
 	 * - POST

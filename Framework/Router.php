@@ -1,7 +1,7 @@
 <?php
 namespace Jaf;
 /**
- * Jaf 的路由器
+ * # Jaf 的路由器
  */
 final class Router {
 	protected $_routes ;
