@@ -1,19 +1,22 @@
 <?php
 namespace Jaf;
+/**
+ * Jaf 异常
+ * Jaf 在遇到异常的时候会:
+ * - 发送 http head ServerStatus: $code|500
+ * - 如果 display_errors = 0 ,输出异常信息
+ */
 class Exception extends \Exception {
-	protected $file ;
-	protected $line ;
-	protected $message ;
-	protected $code ;
-	protected $previous ;
-	final private function __clone (){}
-	public function __construct ( $message, $code, $previous){}
-	final public function getMessage (){}
-	final public function getCode (){}
-	final public function getFile (){}
-	final public function getLine (){}
-	final public function getTrace (){}
-	final public function getPrevious (){}
-	final public function getTraceAsString (){}
-	public function __toString (){}
+	public function __construct ( $message, $code=500, $previous){
+		$message=$message.($previous?$previous->getMessage():'');
+		parent::__construct ( $message, $code, $previous);
+		header('ServerStatus: '.($code?:500));
+		if(method_exists($this, 'onException'))
+			$this->onException();
+		elseif(!ini_get('display_errors'))
+			echo $this->getMessage();
+	}
+	public function __toString (){
+		return $this->getMessage();
+	}
 }
