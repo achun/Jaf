@@ -110,6 +110,14 @@ final class Application {
 		return $this->responses[$id];
 	}
 	/**
+	 * 获取指定id的请求
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+	public function getRequest( $id ){
+		return $this->requests[$id];
+	}
+	/**
 	 * 在结束时调用 $callback
 	 * @param  function $callback [description]
 	 * @return [type]             [description]
@@ -135,6 +143,7 @@ final class Application {
 		$class=$ns?substr($clas,count($ns)+1):$clas;
 
 		//application.directory
+		//filenamePath 模式
 		if(preg_match('#(.+)([A-Z][a-z]+)$#',$class,$match)){
 			list(,$class,$path)=$match;
 			$dir = $this->runing['appdir'];
@@ -144,8 +153,18 @@ final class Application {
 				return;
 			}
 		}
+		//pathPathPathFilename 模式
+		if(preg_match_all('#[A-Za-z][a-z0-9]+#',$class,$match)){
+			$dir = $this->runing['appdir'];
+			$f=$dir.'/'.implode('/',$match[0]).'.php';
+			if(is_file($f)){
+				require $f;
+				return;
+			}
+		}
 		$libs = $this->runing['applib'];
-		//application.librarys 于class同名目录
+		//application.librarys
+		//librarys/clas/clas.php 模式
 		foreach ($libs as $lib) {
 			$f="$lib/$clas/$clas.php";
 			if(is_file($f)){

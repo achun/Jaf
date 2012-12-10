@@ -19,7 +19,7 @@ class Response_Simple extends Response_Abstract {
 		$this->viewed = 1;
 		if($this->viewName[0]==='*') return $this;
 		$id = $this->getId();
-		if(!is_numeric($id)) $render = 1;
+		if(!is_numeric($id)) $render = true;
 		$this->out = \Jaf::view($this,$render?'render':'display');
 		return $this;
 	}

@@ -87,15 +87,21 @@ class PDO_Base extends \PDO implements PDO_Interface {
 	 * @return mixed 影响的记录数
 	 */
 	public function update($into,$where,array $values=array(),array $merge=array()){
+		if(is_array($where) and !$merge){
+			$merge = $where;
+			$where = 'WHERE ' . $this->where($where);
+		}
 		$f='';
+		$v=[];
 		foreach($values as $key=>$val){
 			if(''==$f)
-				$f.="`$key`=:$key";
+				$f.="`$key`=:_$key";
 			else
-				$f.=",`$key`=:$key";
+				$f.=",`$key`=:_$key";
+			$v['_'.$key]=$val;
 		}
 		$sql="UPDATE `$into` SET $f $where;";
-		return $this->write($sql,array_merge($values,$merge));
+		return $this->write($sql,array_merge($v,$merge));
 	}
 	/**
 	 * delete

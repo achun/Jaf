@@ -37,7 +37,7 @@ abstract class Response_Abstract implements Response_Interface {
 	 * @return string
 	 */
 	public function toString (){
-		$this->getOut();
+		$this->getOut(true);
 		if( $this->out ) return $this->out;
 		switch (gettype($this->data)) {
 			case 'string':				

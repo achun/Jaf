@@ -16,10 +16,13 @@ abstract class Controller_Abstract implements Controller_Interface{
 	public $actions ;
 	protected $_reqData;		//原始请求模型数据,控制器总是从一个原始请求开始
 	protected $_reqId;			//原始请求ID
-	final public function __construct (Request_Abstract $req){
+	final public function __construct (Request_Abstract $req,$init=true){
 		$this->_reqData=$req->getModel();
 		$this->_reqId=$req->getId();
-		$this->init();
+		if(is_string($init))
+			$this->_reqData['action']=$init;
+		if($init)
+			$this->init();
 	}
 	/**
 	 * 控制器初始化
@@ -34,5 +37,8 @@ abstract class Controller_Abstract implements Controller_Interface{
 	}
 	public function getReqID(){
 		return $this->_reqId;
-	}	
+	}
+	public function getReq(){
+		return \Jaf::App()->getRequest($this->_reqId);
+	}
 }
